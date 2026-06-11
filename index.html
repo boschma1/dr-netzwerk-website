@@ -1,0 +1,828 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dr. Netzwerk – IT-Infrastruktur für moderne Arztpraxen</title>
+<meta name="description" content="Professionelle, DSGVO-konforme IT-Netzwerke für Arztpraxen. 24/7 Überwachung, lokale Datenhaltung, ein Ansprechpartner für alles." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b1f3a;
+    --ink-2:#11335c;
+    --ink-soft:#3b4d6a;
+    --muted:#6b7a90;
+    --line:#e4ebf3;
+    --bg:#f5f8fc;
+    --bg-2:#eaf2fb;
+    --white:#ffffff;
+    --primary:#0a4c8c;       /* clinical deep blue */
+    --primary-dark:#073461;
+    --accent:#19b89a;         /* medical teal */
+    --accent-dark:#0f8f78;
+    --warn:#c95a16;
+    --shadow-sm: 0 1px 2px rgba(11,31,58,.06), 0 1px 1px rgba(11,31,58,.04);
+    --shadow-md: 0 10px 30px -12px rgba(11,31,58,.18), 0 4px 10px -6px rgba(11,31,58,.10);
+    --shadow-lg: 0 30px 60px -20px rgba(11,31,58,.28), 0 10px 24px -10px rgba(11,31,58,.16);
+    --radius: 14px;
+    --radius-lg: 22px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{font-family:'Fraunces','Inter',serif; color:var(--ink); letter-spacing:-0.01em; line-height:1.15; margin:0 0 .5em}
+  h1{font-size:clamp(2.2rem,4.6vw,3.7rem); font-weight:700}
+  h2{font-size:clamp(1.7rem,3vw,2.5rem); font-weight:600}
+  h3{font-size:1.25rem; font-weight:600; font-family:'Inter',sans-serif; letter-spacing:-0.005em}
+  p{margin:0 0 1em; color:var(--ink-soft)}
+  a{color:var(--primary); text-decoration:none}
+  a:hover{color:var(--primary-dark)}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:.5rem;
+    font-size:.78rem; letter-spacing:.14em; text-transform:uppercase;
+    font-weight:600; color:var(--primary);
+    padding:.4rem .75rem; border-radius:999px;
+    background:rgba(10,76,140,.08);
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(25,184,154,.18)}
+
+  /* ============ NAV ============ */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,.85);
+    backdrop-filter:saturate(180%) blur(14px);
+    -webkit-backdrop-filter:saturate(180%) blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+  .logo{display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.05rem; color:var(--ink)}
+  .logo-mark{
+    width:38px;height:38px;border-radius:10px;
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+    display:grid;place-items:center; color:#fff;
+    box-shadow:var(--shadow-sm);
+  }
+  .logo small{display:block; font-weight:500; font-size:.72rem; color:var(--muted); letter-spacing:.08em; text-transform:uppercase}
+  .nav-links{display:flex; gap:28px; align-items:center}
+  .nav-links a{color:var(--ink-soft); font-weight:500; font-size:.95rem}
+  .nav-links a:hover{color:var(--primary)}
+  .btn{
+    display:inline-flex; align-items:center; gap:.5rem;
+    background:var(--primary); color:#fff;
+    padding:.8rem 1.25rem; border-radius:10px; font-weight:600;
+    font-size:.95rem; border:1px solid var(--primary);
+    transition:transform .15s ease, box-shadow .2s ease, background .2s ease;
+    box-shadow:var(--shadow-sm); cursor:pointer;
+  }
+  .btn:hover{background:var(--primary-dark); border-color:var(--primary-dark); color:#fff; transform:translateY(-1px); box-shadow:var(--shadow-md)}
+  .btn.ghost{background:transparent; color:var(--ink); border-color:var(--line)}
+  .btn.ghost:hover{background:var(--bg); color:var(--ink); border-color:#cfd9e6}
+  .btn.accent{background:var(--accent); border-color:var(--accent)}
+  .btn.accent:hover{background:var(--accent-dark); border-color:var(--accent-dark)}
+  .btn.lg{padding:1rem 1.6rem; font-size:1rem; border-radius:12px}
+  .hamburger{display:none; background:none; border:0; cursor:pointer; padding:8px}
+  .hamburger span{display:block; width:22px; height:2px; background:var(--ink); margin:5px 0; border-radius:2px; transition:.2s}
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative; overflow:hidden;
+    background:
+      radial-gradient(1100px 600px at 85% -10%, rgba(25,184,154,.10), transparent 60%),
+      radial-gradient(900px 600px at -10% 30%, rgba(10,76,140,.10), transparent 60%),
+      linear-gradient(180deg,#fbfdff,#f3f8fd);
+  }
+  .hero-inner{display:grid; grid-template-columns:1.05fr .95fr; gap:60px; align-items:center; padding:80px 0 90px}
+  .hero h1 span.hl{color:var(--primary); position:relative; white-space:nowrap}
+  .hero h1 span.hl::after{
+    content:""; position:absolute; left:0; right:0; bottom:.08em; height:.28em;
+    background:linear-gradient(90deg, rgba(25,184,154,.35), rgba(25,184,154,.0));
+    border-radius:4px; z-index:-1;
+  }
+  .hero-sub{font-size:1.15rem; max-width:560px; color:var(--ink-soft)}
+  .hero-cta{display:flex; gap:14px; flex-wrap:wrap; margin-top:28px}
+  .hero-stats{display:flex; gap:32px; margin-top:42px; padding-top:28px; border-top:1px solid var(--line); flex-wrap:wrap}
+  .stat .num{font-family:'Fraunces',serif; font-size:1.75rem; font-weight:600; color:var(--ink); line-height:1}
+  .stat .lbl{font-size:.85rem; color:var(--muted); margin-top:6px; letter-spacing:.02em}
+
+  /* hero visual */
+  .hero-visual{position:relative; min-height:460px}
+  .panel{
+    position:absolute; background:#fff; border:1px solid var(--line);
+    border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); padding:20px;
+  }
+  .panel.main{top:0; left:0; right:30px; bottom:60px; padding:24px}
+  .panel.float{left:auto; right:0; bottom:0; width:280px; padding:18px}
+  .panel.badge{
+    top:30px; right:0; left:auto; width:auto; padding:12px 16px;
+    display:flex; align-items:center; gap:10px; border-radius:999px;
+    background:#0f2747; color:#fff; border-color:#1a3c66;
+  }
+  .pulse{width:10px; height:10px; border-radius:50%; background:#19b89a; box-shadow:0 0 0 4px rgba(25,184,154,.25); position:relative}
+  .pulse::after{content:""; position:absolute; inset:-4px; border-radius:50%; border:2px solid #19b89a; opacity:.6; animation:ping 1.8s ease-out infinite}
+  @keyframes ping{0%{transform:scale(.6); opacity:.7} 80%,100%{transform:scale(1.6); opacity:0}}
+
+  .console-head{display:flex; align-items:center; justify-content:space-between; padding-bottom:14px; border-bottom:1px solid var(--line); margin-bottom:14px}
+  .console-head .title{font-weight:600; font-size:.95rem; display:flex; align-items:center; gap:8px}
+  .console-head .status{font-size:.75rem; color:var(--accent-dark); background:rgba(25,184,154,.12); padding:4px 10px; border-radius:999px; font-weight:600}
+  .nodes{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+  .node{background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:12px; font-size:.78rem; color:var(--ink-soft)}
+  .node .name{font-weight:600; color:var(--ink); font-size:.85rem; margin-bottom:2px}
+  .node .ok{color:var(--accent-dark); font-weight:600; font-size:.72rem; letter-spacing:.04em; text-transform:uppercase}
+  .node .warn{color:var(--warn); font-weight:600; font-size:.72rem; letter-spacing:.04em; text-transform:uppercase}
+  .chart{margin-top:16px; height:90px; position:relative; background:linear-gradient(180deg, rgba(10,76,140,.05), transparent); border-radius:8px; overflow:hidden}
+  .chart svg{position:absolute; inset:0; width:100%; height:100%}
+
+  .panel.float .ticket-head{display:flex; align-items:center; gap:10px; margin-bottom:8px}
+  .panel.float .ticket-head .ic{width:32px;height:32px;border-radius:8px; background:rgba(10,76,140,.10); display:grid; place-items:center; color:var(--primary)}
+  .panel.float .tval{font-weight:700; font-size:1.4rem; color:var(--ink)}
+  .panel.float .tlabel{color:var(--muted); font-size:.8rem}
+
+  /* ============ TRUST STRIP ============ */
+  .trust{background:var(--ink); color:#dfe7f3; padding:22px 0}
+  .trust-inner{display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; align-items:center}
+  .trust .item{display:flex; align-items:center; gap:10px; font-size:.92rem; font-weight:500}
+  .trust .item svg{flex:none}
+
+  /* ============ SECTION ============ */
+  section{padding:90px 0}
+  .sec-head{max-width:760px; margin:0 auto 56px; text-align:center}
+  .sec-head p{font-size:1.08rem}
+
+  /* ============ MISSION ============ */
+  .mission{background:var(--bg)}
+  .mission .card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius-lg);
+    padding:50px; box-shadow:var(--shadow-sm); display:grid; grid-template-columns:1fr 1.4fr; gap:48px; align-items:center;
+  }
+  .mission .quote-mark{font-family:'Fraunces',serif; font-size:6rem; line-height:.8; color:var(--primary); opacity:.18}
+  .mission .signature{margin-top:18px; display:flex; align-items:center; gap:10px; font-weight:600; color:var(--primary)}
+  .mission .signature svg{flex:none}
+
+  /* ============ SERVICES ============ */
+  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+  .service{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px; transition:transform .2s ease, box-shadow .25s ease, border-color .2s;
+    display:flex; flex-direction:column;
+  }
+  .service:hover{transform:translateY(-4px); box-shadow:var(--shadow-md); border-color:#cfdcec}
+  .ic-box{
+    width:46px; height:46px; border-radius:12px;
+    background:linear-gradient(135deg, rgba(10,76,140,.10), rgba(25,184,154,.14));
+    color:var(--primary); display:grid; place-items:center; margin-bottom:18px;
+  }
+  .service h3{margin-bottom:8px}
+  .service p{font-size:.95rem; margin:0}
+
+  /* ============ NO CLOUD ============ */
+  .nocloud{
+    background:
+      radial-gradient(1000px 500px at 100% 0%, rgba(25,184,154,.10), transparent 60%),
+      linear-gradient(135deg, #0a2244, #0a4c8c);
+    color:#e7f0fb; position:relative; overflow:hidden;
+  }
+  .nocloud::before{
+    content:""; position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size:48px 48px;
+    mask-image: radial-gradient(closest-side at 30% 40%, #000 50%, transparent 100%);
+  }
+  .nocloud-inner{position:relative; display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center}
+  .nocloud h2{color:#fff; font-size:clamp(1.9rem,3.4vw,2.8rem)}
+  .nocloud h2 em{color:var(--accent); font-style:normal}
+  .nocloud p{color:#c8d6ea}
+  .nocloud .pills{display:flex; flex-wrap:wrap; gap:10px; margin-top:24px}
+  .pill{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); padding:.55rem 1rem; border-radius:999px; font-size:.88rem; font-weight:500; color:#fff}
+  .nocloud-card{
+    background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.15);
+    border-radius:var(--radius-lg); padding:32px; backdrop-filter:blur(6px);
+  }
+  .nocloud-card .row{display:flex; align-items:flex-start; gap:14px; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.10)}
+  .nocloud-card .row:last-child{border-bottom:0}
+  .nocloud-card .row .ic{width:36px;height:36px;border-radius:10px; background:rgba(25,184,154,.18); display:grid; place-items:center; color:var(--accent); flex:none}
+  .nocloud-card .row .t{font-weight:600; color:#fff}
+  .nocloud-card .row .d{font-size:.88rem; color:#b6c7df; margin-top:2px}
+
+  /* ============ PRICING ============ */
+  .pricing{background:var(--bg)}
+  .price-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px; margin-top:14px}
+  .tier{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius-lg);
+    padding:30px 26px; display:flex; flex-direction:column; position:relative;
+    transition:transform .2s ease, box-shadow .25s ease;
+  }
+  .tier:hover{transform:translateY(-4px); box-shadow:var(--shadow-md)}
+  .tier .tier-name{display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.05rem; color:var(--ink); margin-bottom:4px}
+  .tier .medal{width:24px;height:24px;border-radius:50%; display:inline-block; box-shadow:inset 0 -3px 6px rgba(0,0,0,.18), 0 2px 4px rgba(0,0,0,.10)}
+  .medal.bronze{background:linear-gradient(135deg,#caa472,#8a5a2b)}
+  .medal.silver{background:linear-gradient(135deg,#dfe5ec,#9aa6b6)}
+  .medal.gold{background:linear-gradient(135deg,#f6d36a,#c2922a)}
+  .medal.platinum{background:linear-gradient(135deg,#e2eef7,#4e6f8e)}
+  .tier .sub{font-size:.88rem; color:var(--muted); margin-bottom:18px}
+  .tier .price{display:flex; align-items:baseline; gap:6px; margin-bottom:6px}
+  .tier .price .amount{font-family:'Fraunces',serif; font-size:2.4rem; font-weight:600; color:var(--ink); line-height:1}
+  .tier .price .unit{color:var(--muted); font-size:.92rem; font-weight:500}
+  .tier .net{font-size:.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; font-weight:600; margin-bottom:22px}
+  .tier ul{list-style:none; padding:0; margin:0 0 24px; display:flex; flex-direction:column; gap:12px; flex:1}
+  .tier li{display:flex; gap:10px; font-size:.92rem; color:var(--ink-soft); line-height:1.5}
+  .tier li svg{flex:none; margin-top:2px; color:var(--accent-dark)}
+  .tier .btn{width:100%; justify-content:center}
+
+  .tier.featured{
+    border-color:var(--primary); box-shadow:0 24px 50px -20px rgba(10,76,140,.35), 0 8px 20px -10px rgba(10,76,140,.18);
+    transform:translateY(-6px);
+  }
+  .tier.featured:hover{transform:translateY(-10px)}
+  .tier.featured .badge{
+    position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+    background:var(--primary); color:#fff; font-size:.72rem; font-weight:700;
+    letter-spacing:.12em; text-transform:uppercase;
+    padding:.4rem .8rem; border-radius:999px; white-space:nowrap;
+  }
+
+  .price-note{margin-top:32px; text-align:center; font-size:.9rem; color:var(--muted)}
+
+  /* ============ PROCESS ============ */
+  .process-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:20px}
+  .step{padding:28px; background:#fff; border:1px solid var(--line); border-radius:var(--radius); position:relative}
+  .step .n{font-family:'Fraunces',serif; font-size:2.2rem; font-weight:600; color:var(--primary); line-height:1}
+  .step h3{margin:14px 0 6px}
+  .step p{font-size:.92rem; margin:0}
+
+  /* ============ CTA ============ */
+  .cta-band{
+    background:linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color:#fff; border-radius:var(--radius-lg); padding:48px;
+    display:grid; grid-template-columns:1.4fr 1fr; gap:40px; align-items:center;
+    box-shadow:var(--shadow-lg);
+  }
+  .cta-band h2{color:#fff; margin-bottom:8px}
+  .cta-band p{color:#cfdef2; margin:0}
+  .cta-actions{display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end}
+  .cta-band .btn{background:#fff; color:var(--primary); border-color:#fff}
+  .cta-band .btn:hover{background:var(--bg); color:var(--primary-dark); border-color:var(--bg)}
+  .cta-band .btn.ghost{background:transparent; color:#fff; border-color:rgba(255,255,255,.5)}
+  .cta-band .btn.ghost:hover{background:rgba(255,255,255,.08); color:#fff}
+
+  /* ============ FOOTER ============ */
+  footer{background:#08182f; color:#aebdd2; padding:60px 0 30px; margin-top:90px}
+  .foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px}
+  footer h4{color:#fff; font-family:'Inter',sans-serif; font-size:.85rem; letter-spacing:.12em; text-transform:uppercase; margin-bottom:18px}
+  footer a{color:#aebdd2; display:block; padding:4px 0; font-size:.95rem}
+  footer a:hover{color:#fff}
+  .foot-bottom{border-top:1px solid #1c2e4a; padding-top:24px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; font-size:.85rem; color:#7d8da3}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 980px){
+    .hero-inner{grid-template-columns:1fr; gap:50px}
+    .hero-visual{min-height:420px}
+    .nocloud-inner{grid-template-columns:1fr}
+    .mission .card{grid-template-columns:1fr; padding:32px; gap:24px}
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .price-grid{grid-template-columns:repeat(2,1fr)}
+    .process-grid{grid-template-columns:repeat(2,1fr)}
+    .cta-band{grid-template-columns:1fr; padding:36px; text-align:center}
+    .cta-actions{justify-content:center}
+    .foot-grid{grid-template-columns:1fr 1fr; gap:30px}
+    .tier.featured{transform:none}
+    .tier.featured:hover{transform:translateY(-4px)}
+  }
+  @media (max-width: 640px){
+    section{padding:64px 0}
+    .nav-links{display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-bottom:1px solid var(--line); flex-direction:column; padding:18px 24px; gap:14px}
+    .nav-links.open{display:flex}
+    .nav-links .btn{align-self:flex-start}
+    .hamburger{display:block}
+    .grid, .price-grid, .process-grid, .foot-grid{grid-template-columns:1fr}
+    .mission .card{padding:24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12h4l2-7 4 14 2-7h6"/>
+        </svg>
+      </div>
+      <div>
+        Dr. Netzwerk
+        <small>IT für Arztpraxen</small>
+      </div>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#philosophie">Philosophie</a>
+      <a href="#pakete">Support-Pakete</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#kontakt" class="btn">Beratung anfragen</a>
+    </nav>
+    <button class="hamburger" aria-label="Menü öffnen" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Spezialisiert auf Arztpraxen</span>
+      <h1>Ihr Praxisnetzwerk. <span class="hl">Rund um die Uhr</span> stabil, sicher und in Ihrer Hand.</h1>
+      <p class="hero-sub">
+        Wir planen, installieren und überwachen das komplette IT-Netzwerk Ihrer Arztpraxis – DSGVO-konform, mit ausschließlich lokaler Datenhaltung und einem einzigen Ansprechpartner für alles.
+      </p>
+      <div class="hero-cta">
+        <a href="#kontakt" class="btn lg">Kostenlose Erstberatung
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#pakete" class="btn ghost lg">Support-Pakete ansehen</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="num">365 / 7 / 24</div><div class="lbl">Netzwerküberwachung in Echtzeit</div></div>
+        <div class="stat"><div class="num">0 %</div><div class="lbl">Daten in der Cloud</div></div>
+        <div class="stat"><div class="num">1</div><div class="lbl">Ansprechpartner für alles</div></div>
+      </div>
+    </div>
+
+    <!-- HERO VISUAL -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="panel badge">
+        <span class="pulse"></span>
+        <span style="font-weight:600;font-size:.9rem">Live-Überwachung aktiv</span>
+      </div>
+      <div class="panel main">
+        <div class="console-head">
+          <div class="title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a4c8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+            Praxis Dr. Beispiel – Netzwerkstatus
+          </div>
+          <span class="status">Alle Systeme ok</span>
+        </div>
+        <div class="nodes">
+          <div class="node"><div class="name">Firewall</div><div class="ok">● online</div></div>
+          <div class="node"><div class="name">Server</div><div class="ok">● online</div></div>
+          <div class="node"><div class="name">Backup</div><div class="ok">● synced</div></div>
+          <div class="node"><div class="name">VoIP</div><div class="ok">● online</div></div>
+          <div class="node"><div class="name">WLAN</div><div class="ok">● online</div></div>
+          <div class="node"><div class="name">Kameras</div><div class="ok">● online</div></div>
+        </div>
+        <div class="chart">
+          <svg viewBox="0 0 300 90" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#19b89a" stop-opacity=".35"/>
+                <stop offset="100%" stop-color="#19b89a" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,60 C30,55 50,40 75,42 C100,44 120,65 150,55 C180,45 200,30 230,35 C260,40 280,28 300,30 L300,90 L0,90 Z" fill="url(#g1)"/>
+            <path d="M0,60 C30,55 50,40 75,42 C100,44 120,65 150,55 C180,45 200,30 230,35 C260,40 280,28 300,30" stroke="#19b89a" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+      </div>
+      <div class="panel float">
+        <div class="ticket-head">
+          <div class="ic">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4.5 8-12V5l-8-3-8 3v5c0 7.5 8 12 8 12z"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.78rem;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase">Verfügbarkeit</div>
+          </div>
+        </div>
+        <div class="tval">99,98 %</div>
+        <div class="tlabel">letzte 12 Monate · alle Praxisstandorte</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<div class="trust">
+  <div class="wrap trust-inner">
+    <div class="item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#19b89a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4.5 8-12V5l-8-3-8 3v5c0 7.5 8 12 8 12z"/><path d="m9 12 2 2 4-4"/></svg>
+      DSGVO-konform
+    </div>
+    <div class="item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#19b89a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M21 4v6h-6"/></svg>
+      24/7 Monitoring
+    </div>
+    <div class="item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#19b89a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+      Daten bleiben lokal
+    </div>
+    <div class="item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#19b89a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V20a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3.08a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+      Ein Ansprechpartner
+    </div>
+    <div class="item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#19b89a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg>
+      Eigenes Rechenzentrum
+    </div>
+  </div>
+</div>
+
+<!-- ============ MISSION ============ -->
+<section class="mission" id="philosophie">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Mission</span>
+      <h2>Damit Sie sich auf Ihre Patienten konzentrieren können.</h2>
+    </div>
+    <div class="card">
+      <div>
+        <div class="quote-mark">„</div>
+        <h3 style="font-family:'Fraunces',serif; font-size:1.5rem; font-weight:600; line-height:1.3">
+          Eine moderne Arztpraxis braucht ein professionelles, stabiles IT-Netzwerk – rund um die Uhr.
+        </h3>
+        <div class="signature">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          Unsere Überzeugung
+        </div>
+      </div>
+      <div>
+        <p>
+          Die verlässliche Anbindung und Verknüpfung moderner Behandlungssysteme und Maschinen muss in Echtzeit auf Fehler und Ausfälle hin überwacht werden. Schnittstellen zu unterschiedlichen Lieferanten und Anbietern müssen auf ein Minimum reduziert werden.
+        </p>
+        <p>
+          Im Fokus stehen bei uns die hohen Anforderungen der <strong>DSGVO</strong> – und der Anspruch, <strong>keine Daten jemals in eine Cloud zu geben</strong>.
+        </p>
+        <p style="margin-bottom:0;color:var(--ink);font-weight:600">
+          Dr. Netzwerk ist Ihr professioneller Ansprechpartner, von dem Sie alles aus einer Hand erhalten.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEISTUNGEN ============ -->
+<section id="leistungen">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Leistungen</span>
+      <h2>Alles, was Ihr Praxisnetzwerk braucht – aus einer Hand.</h2>
+      <p>Vom ersten Beratungsgespräch über die Planung bis zur dauerhaften Betreuung Ihres Netzwerks: Sie haben einen einzigen Ansprechpartner und eine Telefonnummer für sämtliche Fragestellungen.</p>
+    </div>
+
+    <div class="grid">
+      <div class="service">
+        <div class="ic-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V20a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3.08a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3>Ein Ansprechpartner für alles</h3>
+        <p>Eine Telefonnummer für Datennetzwerk, Datensicherung, Telefonie, E-Mail-System und Internetanbindung in Ihrer Praxis.</p>
+      </div>
+
+      <div class="service">
+        <div class="ic-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 6-6"/></svg>
+        </div>
+        <h3>Beratung & Projektmanagement</h3>
+        <p>Planung Ihres modernen IT-Netzwerks und Steuerung aller Lieferanten – inklusive Verkabelung und zukunftssicherer Internetanbindung mit höchster Bandbreite.</p>
+      </div>
+
+      <div class="service">
+        <div class="ic-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h3>Maßgeschneiderte Planung</h3>
+        <p>Mit interaktiven Planungstools entwerfen wir auf Basis Ihres Grundrisses und Ihrer Prozesse eine hochmoderne, nachhaltige Hard- und Softwarelösung.</p>
+      </div>
+
+      <div class="service">
+        <div class="ic-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4.5 8-12V5l-8-3-8 3v5c0 7.5 8 12 8 12z"/></svg>
+        </div>
+        <h3>Firewall & Sicherheit</h3>
+        <p>Konfiguration und Einrichtung von Firewall und Netzwerkkomponenten – differenziert für jedes Endgerät und jeden Benutzer.</p>
+      </div>
+
+      <div class="service">
+        <div class="ic-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7 9 18l-5-5"/></svg>
+        </div>
+        <h3>Lieferung & Installation</h3>
+        <p>Lieferung, Installation und Einrichtung sämtlicher Netzwerkkomponenten – pünktlich, dokumentiert und einsatzbereit.</p>
+      </div>
+
+      <div class="service">
+        <div class="ic-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        </div>
+        <h3>Lokale Datenhaltung & Backup</h3>
+        <p>Netzwerklaufwerke mit Benutzerberechtigungen in Ihrer Praxis – optional mit redundanter Backup-Sicherung in unserem Rechenzentrum, falls Daten durch Brand oder Schaden verloren gehen.</p>
+      </div>
+
+      <div class="service">
+        <div class="ic-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </div>
+        <h3>365 / 7 / 24 Echtzeit-Monitoring</h3>
+        <p>Jeden Tag, jede Stunde, jede Minute: höchstmögliche Ausfallsicherheit und Stabilität Ihres Netzwerks – proaktiv überwacht.</p>
+      </div>
+
+      <div class="service">
+        <div class="ic-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <h3>Patches & Updates – automatisch</h3>
+        <p>Sicherheitsrelevante Patches, Hotfixes und Software-Updates spielen wir vollautomatisch, proaktiv oder zu definierten Wartungsfenstern auf.</p>
+      </div>
+
+      <div class="service">
+        <div class="ic-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V20a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3.08a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3>Telefonanlage ohne Cloud</h3>
+        <p>Auf Wunsch nutzen Sie Ihr neues Netzwerk als hochprofessionelle Telefonanlage – ganz ohne Cloud-Anbindung.</p>
+      </div>
+
+      <div class="service">
+        <div class="ic-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <h3>Videoüberwachung</h3>
+        <p>Parkplatz, Eingangstür, Praxisräume oder Wartezimmer – optional auch zur Bild- und Tonaufzeichnung von Operationen zu Beweiszwecken. Aufzeichnung lokal in Ihren Räumlichkeiten.</p>
+      </div>
+
+      <div class="service">
+        <div class="ic-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+        </div>
+        <h3>E-Mail-System</h3>
+        <p>Einrichten und Verwalten Ihrer E-Mail-Adressen – inklusive Fehlerbehebung während der Bürozeiten oder rund um die Uhr.</p>
+      </div>
+
+      <div class="service">
+        <div class="ic-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Echtzeit-Überwachung Backup</h3>
+        <p>Wir überwachen Ihre Datensicherung in Echtzeit – sowohl lokal in der Praxis als auch im redundanten Backup unseres Rechenzentrums.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NO CLOUD ============ -->
+<section class="nocloud">
+  <div class="wrap nocloud-inner">
+    <div>
+      <span class="eyebrow" style="color:#19b89a;background:rgba(25,184,154,.12)"><span class="dot" style="background:#19b89a;box-shadow:0 0 0 4px rgba(25,184,154,.25)"></span> Unsere Position</span>
+      <h2>Wir <em>hassen</em> Cloud.<br/>Ihre Patientendaten gehören in Ihre Praxis.</h2>
+      <p>
+        Für uns ist das keine Marketing-Floskel, sondern ein Versprechen: Patientendaten, Diagnosen, Aufzeichnungen, Telefonate und Videoüberwachung speichern wir grundsätzlich <strong style="color:#fff">lokal in Ihren Praxisräumlichkeiten</strong>. Optional zusätzlich redundant in unserem deutschen Rechenzentrum – aber niemals in einer öffentlichen Cloud.
+      </p>
+      <div class="pills">
+        <span class="pill">✓ DSGVO-konform</span>
+        <span class="pill">✓ Keine US-Anbieter</span>
+        <span class="pill">✓ Verschlüsselte Backups</span>
+        <span class="pill">✓ Nachvollziehbare Berechtigungen</span>
+      </div>
+    </div>
+    <div class="nocloud-card">
+      <div class="row">
+        <div class="ic">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+        </div>
+        <div>
+          <div class="t">Lokale Datenhaltung</div>
+          <div class="d">Zentrale Praxisdaten auf Servern in Ihren Räumlichkeiten.</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="ic">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+        </div>
+        <div>
+          <div class="t">Eigenes Rechenzentrum</div>
+          <div class="d">Redundante Backups in Deutschland – niemals bei Drittanbietern.</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="ic">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+        <div>
+          <div class="t">Wartung im Hintergrund</div>
+          <div class="d">Updates und Hotfixes automatisiert – zu festgelegten Wartungsfenstern.</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="ic">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
+        </div>
+        <div>
+          <div class="t">Echtzeit-Reaktion</div>
+          <div class="d">Auffälligkeiten erkennen wir, bevor Ihr Praxisbetrieb betroffen ist.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="pricing" id="pakete">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Support-Pakete</span>
+      <h2>Klare Preise. Klare Leistungen. Monatlich planbar.</h2>
+      <p>Wählen Sie das Paket, das zur Größe und Verfügbarkeit Ihrer Praxis passt. Sie können jederzeit upgraden.</p>
+    </div>
+
+    <div class="price-grid">
+      <!-- Bronze -->
+      <div class="tier">
+        <div class="tier-name"><span class="medal bronze"></span> Bronze</div>
+        <div class="sub">Der Einstieg in zuverlässige Überwachung.</div>
+        <div class="price"><span class="amount">399&thinsp;€</span><span class="unit">/ Monat</span></div>
+        <div class="net">netto</div>
+        <ul>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>365 / 7 / 24 Netzwerküberwachung in Echtzeit – Reaktionszeit während der Bürozeiten (8:00 – 18:00 Uhr)</span>
+          </li>
+        </ul>
+        <a href="#kontakt" class="btn ghost">Beratung anfragen</a>
+      </div>
+
+      <!-- Silber -->
+      <div class="tier">
+        <div class="tier-name"><span class="medal silver"></span> Silber</div>
+        <div class="sub">Für Praxen mit vollem Tagesbetrieb.</div>
+        <div class="price"><span class="amount">599&thinsp;€</span><span class="unit">/ Monat</span></div>
+        <div class="net">netto</div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>365 / 7 / 24 Echtzeit-Überwachung mit Fehlerbehebung rund um die Uhr</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Automatische Patches, Hotfixes & Software-Updates</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>E-Mail-Verwaltung inkl. Fehlerbehebung (8:00 – 18:00 Uhr)</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Echtzeit-Überwachung der lokalen Datensicherung in Ihrer Praxis</span></li>
+        </ul>
+        <a href="#kontakt" class="btn ghost">Beratung anfragen</a>
+      </div>
+
+      <!-- Gold (Featured) -->
+      <div class="tier featured">
+        <span class="badge">Beliebteste Wahl</span>
+        <div class="tier-name"><span class="medal gold"></span> Gold</div>
+        <div class="sub">Empfohlen für Praxen mit hohen Anforderungen.</div>
+        <div class="price"><span class="amount">799&thinsp;€</span><span class="unit">/ Monat</span></div>
+        <div class="net">netto</div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>365 / 7 / 24 Echtzeit-Überwachung mit Fehlerbehebung rund um die Uhr</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Automatische Patches, Hotfixes & Software-Updates</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>E-Mail-Verwaltung inkl. Fehlerbehebung (8:00 – 18:00 Uhr)</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Echtzeit-Überwachung der lokalen Datensicherung in Ihrer Praxis</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Redundante Backup-Steuerung</strong> in unserem Rechenzentrum</span></li>
+        </ul>
+        <a href="#kontakt" class="btn">Beratung anfragen</a>
+      </div>
+
+      <!-- Platin -->
+      <div class="tier">
+        <div class="tier-name"><span class="medal platinum"></span> Platin</div>
+        <div class="sub">Rundum-Sorglos inkl. Telefonie & Video.</div>
+        <div class="price"><span class="amount">1.299&thinsp;€</span><span class="unit">/ Monat</span></div>
+        <div class="net">netto</div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Alle Leistungen aus dem Gold-Paket</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Steuerung der <strong>Telefonanlage</strong> in Echtzeit – Fehlerbehebung 8:00 – 18:00 Uhr</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Steuerung der <strong>Videoüberwachung</strong> in Echtzeit – Fehlerbehebung 8:00 – 18:00 Uhr</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Dedizierter Service-Manager für Ihre Praxis</span></li>
+        </ul>
+        <a href="#kontakt" class="btn ghost">Beratung anfragen</a>
+      </div>
+    </div>
+
+    <p class="price-note">Alle Preise verstehen sich netto pro Monat zzgl. der gesetzlichen Mehrwertsteuer. Hardware, Lizenzen und einmalige Installationskosten werden separat ausgewiesen.</p>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section id="ablauf">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">So arbeiten wir</span>
+      <h2>In vier Schritten zu einem stabilen Praxisnetzwerk.</h2>
+    </div>
+    <div class="process-grid">
+      <div class="step">
+        <div class="n">01</div>
+        <h3>Bestandsaufnahme</h3>
+        <p>Unverbindliches Erstgespräch und Analyse Ihrer aktuellen Praxis-IT und Prozesse.</p>
+      </div>
+      <div class="step">
+        <div class="n">02</div>
+        <h3>Planung</h3>
+        <p>Mit interaktiven Planungstools entwickeln wir die maßgeschneiderte Lösung für Ihren Grundriss.</p>
+      </div>
+      <div class="step">
+        <div class="n">03</div>
+        <h3>Installation</h3>
+        <p>Wir koordinieren Lieferanten, installieren Hardware und konfigurieren Firewall und Backups.</p>
+      </div>
+      <div class="step">
+        <div class="n">04</div>
+        <h3>Betrieb & Support</h3>
+        <p>365 / 7 / 24 Monitoring, automatische Updates und Ihr persönlicher Ansprechpartner.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section id="kontakt" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <span class="eyebrow" style="background:rgba(255,255,255,.12); color:#fff">Bereit?</span>
+        <h2>Lassen Sie uns über Ihre Praxis sprechen.</h2>
+        <p>Kostenlose Erstberatung – unverbindlich, persönlich und ohne Verkaufsdruck. Wir hören zu, bevor wir planen.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="tel:+490000000000" class="btn lg">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V20a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3.08a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          Jetzt anrufen
+        </a>
+        <a href="mailto:info@dr-netzwerk.de" class="btn ghost lg">
+          E-Mail schreiben
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#" class="logo" style="color:#fff">
+          <div class="logo-mark">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
+          </div>
+          <div>Dr. Netzwerk<small style="color:#7d8da3">IT für Arztpraxen</small></div>
+        </a>
+        <p style="color:#aebdd2; margin-top:18px; max-width:300px; font-size:.92rem">
+          Ihr professioneller Ansprechpartner für DSGVO-konforme IT-Netzwerke in der medizinischen Praxis. Lokal. Stabil. Zuverlässig.
+        </p>
+      </div>
+      <div>
+        <h4>Leistungen</h4>
+        <a href="#leistungen">Netzwerkplanung</a>
+        <a href="#leistungen">Firewall & Sicherheit</a>
+        <a href="#leistungen">Backup & Datensicherung</a>
+        <a href="#leistungen">Telefonanlage</a>
+        <a href="#leistungen">Videoüberwachung</a>
+      </div>
+      <div>
+        <h4>Unternehmen</h4>
+        <a href="#philosophie">Philosophie</a>
+        <a href="#pakete">Support-Pakete</a>
+        <a href="#ablauf">Ablauf</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <a href="tel:+490000000000">+49 (0) 000 000 000</a>
+        <a href="mailto:info@dr-netzwerk.de">info@dr-netzwerk.de</a>
+        <p style="color:#aebdd2; margin-top:14px; font-size:.9rem">Mo – Fr · 8:00 – 18:00 Uhr<br/>Notfall-Hotline: 24/7</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© <span id="yr"></span> Dr. Netzwerk. Alle Rechte vorbehalten.</div>
+      <div style="display:flex; gap:20px">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">AGB</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  // close mobile nav on link click
+  document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  }));
+</script>
+</body>
+</html>
