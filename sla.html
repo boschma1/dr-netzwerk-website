@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Service Level Agreement (SLA) – Doktor Netzwerk</title>
+<meta name="description" content="Service Level Agreement (SLA) der Knabe GmbH für die Dienstleistungen unter der Marke Doktor Netzwerk." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="legal.css" />
+<style>
+  /* Slim table styling for SLA matrices */
+  .sla-table{width:100%; border-collapse:collapse; margin:14px 0 22px; font-size:.95rem}
+  .sla-table th, .sla-table td{border:1px solid #e3e9f1; padding:10px 12px; text-align:left; vertical-align:top}
+  .sla-table th{background:#f4f7fb; font-weight:600}
+  .sla-table caption{caption-side:top; text-align:left; font-weight:600; margin-bottom:6px; color:#3a4a63}
+  .draft-banner{
+    background:#fff4d6; border:1px solid #e2c878; color:#5a4310;
+    padding:14px 18px; border-radius:10px; margin:0 0 24px; font-size:.95rem;
+  }
+  .draft-banner strong{color:#3a2a05}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12h4l2-7 4 14 2-7h6"/>
+        </svg>
+      </div>
+      <div>
+        Doktor Netzwerk
+        <small>IT für Arztpraxen</small>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#leistungen">Leistungen</a>
+      <a href="index.html#philosophie">Philosophie</a>
+      <a href="index.html#pakete">Support-Pakete</a>
+      <a href="index.html#kontakt" class="btn">Beratung anfragen</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ CONTENT ============ -->
+<main class="legal">
+  <div class="wrap">
+
+    <span class="eyebrow">Rechtliches</span>
+    <h1>Service Level Agreement (SLA)</h1>
+    <p class="lead">Stand: 14.06.2026 · Version 1.0 (Entwurf)</p>
+
+    <div class="draft-banner">
+      <strong>Hinweis (intern):</strong> Dieses Dokument ist ein Entwurf und nicht öffentlich verlinkt. Vor der
+      Anwendung in Kundenverträgen rechtlich prüfen lassen. Die hier festgelegten Werte (Verfügbarkeiten,
+      Reaktionszeiten, Service Credits) sind Vorschläge und können je Kunde individuell angepasst werden.
+    </div>
+
+    <h2>1. Geltungsbereich und Vertragsgegenstand</h2>
+    <p>
+      1.1 Dieses Service Level Agreement (nachfolgend „<strong>SLA</strong>“) konkretisiert die im Rahmen der
+      Allgemeinen Geschäftsbedingungen (AGB) der <strong>Knabe GmbH</strong>, Grendelweg 25, CH-4432 Lampenberg,
+      Schweiz (nachfolgend „<strong>Doktor Netzwerk</strong>“ oder „Anbieter“), gegenüber dem Kunden zu
+      erbringenden Serviceleistungen.
+    </p>
+    <p>
+      1.2 Das SLA wird als Anlage zum jeweiligen Einzelvertrag (Support-Paket) Bestandteil des Vertrages.
+      Bei Widersprüchen zwischen Einzelvertrag, SLA und AGB gilt folgende Rangfolge: Einzelvertrag &gt; SLA &gt;
+      AGB.
+    </p>
+    <p>
+      1.3 Gegenstand sind die Überwachung, der Betrieb und die Störungsbeseitigung am vom Anbieter installierten
+      und/oder betreuten lokalen Praxisnetzwerk des Kunden (Router, Firewall, Switche, WLAN, strukturierte
+      Verkabelung, lokale Datensicherung sowie – paketabhängig – Telefonie und Videoüberwachung).
+    </p>
+
+    <h2>2. Begriffsbestimmungen</h2>
+    <ul>
+      <li><strong>Servicezeit</strong>: Zeitfenster, in dem Doktor Netzwerk Störungen aktiv bearbeitet und der
+        Kunde Doktor Netzwerk kontaktieren kann (siehe § 3).</li>
+      <li><strong>Reaktionszeit</strong>: Zeitspanne zwischen dem Eingang einer ordnungsgemäßen Störungsmeldung
+        bzw. der automatisierten Alarmierung durch das Monitoring innerhalb der Servicezeit und dem Beginn der
+        Fehleranalyse durch Doktor Netzwerk. Die Reaktionszeit ist keine Wiederherstellungszeit.</li>
+      <li><strong>Wiederherstellungszielzeit</strong>: Angestrebte Zeit bis zur Wiederherstellung des
+        Sollzustandes. Wiederherstellungszielzeiten sind Zielwerte, keine garantierten Leistungszeiten.</li>
+      <li><strong>Verfügbarkeit</strong>: Verhältnis der tatsächlichen Betriebszeit zur Soll-Betriebszeit
+        innerhalb eines Kalendermonats, gemessen am zentralen Praxis-Switch gemäß § 7.</li>
+      <li><strong>Wartungsfenster</strong>: Geplante Zeiten, in denen Wartungs- oder Aktualisierungsarbeiten
+        durchgeführt werden (siehe § 8).</li>
+      <li><strong>Service Credit</strong>: Gutschrift auf das Monatsentgelt bei Unterschreitung der vereinbarten
+        Verfügbarkeit (siehe § 10).</li>
+    </ul>
+
+    <h2>3. Servicezeiten je Paket</h2>
+    <p>
+      Doktor Netzwerk überwacht das Praxisnetzwerk in allen Paketen 365 Tage im Jahr, 7 Tage in der Woche, 24 Stunden
+      am Tag (365 / 7 / 24-Echtzeit-Monitoring). Die Servicezeiten für die <em>aktive Störungsbearbeitung</em>
+      richten sich nach dem gebuchten Paket:
+    </p>
+    <table class="sla-table" aria-describedby="caption-servicezeiten">
+      <caption id="caption-servicezeiten">Servicezeiten für die aktive Störungsbearbeitung</caption>
+      <thead>
+        <tr><th>Paket</th><th>Servicezeit Fehlerbehebung</th><th>Monitoring</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Bronze</td><td>Mo–Fr 08:00–18:00 Uhr (MEZ/MESZ), ausgenommen gesetzliche Feiertage im Kanton Basel-Landschaft</td><td>365 / 7 / 24</td></tr>
+        <tr><td>Silber</td><td>365 / 7 / 24</td><td>365 / 7 / 24</td></tr>
+        <tr><td>Gold</td><td>365 / 7 / 24</td><td>365 / 7 / 24</td></tr>
+        <tr><td>Platin</td><td>365 / 7 / 24, zusätzlich dedizierter Service-Manager an Werktagen 08:00–18:00 Uhr</td><td>365 / 7 / 24</td></tr>
+      </tbody>
+    </table>
+
+    <h2>4. Prioritätsklassen</h2>
+    <p>
+      Störungen werden bei Eingang durch Doktor Netzwerk gemeinsam mit dem Kunden in eine der folgenden Klassen
+      eingestuft. Maßgeblich ist die Auswirkung auf den Praxisbetrieb:
+    </p>
+    <table class="sla-table" aria-describedby="caption-prios">
+      <caption id="caption-prios">Prioritätsklassen</caption>
+      <thead>
+        <tr><th>Priorität</th><th>Beschreibung</th><th>Beispiele</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>P1 – Kritisch</strong></td>
+          <td>Vollständiger Ausfall geschäftskritischer Funktionen; Praxisbetrieb steht still.</td>
+          <td>Netzwerk komplett ausgefallen; Praxisverwaltungssystem (PVS) oder Telematikinfrastruktur (TI) nicht erreichbar; Patientendaten nicht zugänglich.</td>
+        </tr>
+        <tr>
+          <td><strong>P2 – Hoch</strong></td>
+          <td>Wesentliche Funktionsstörung; Praxisbetrieb erheblich eingeschränkt, ohne dauerhaften Workaround.</td>
+          <td>Ausfall eines Praxisbereichs (z. B. Empfang oder Behandlungszimmer); Telefonie nicht nutzbar; Backup-System ausgefallen.</td>
+        </tr>
+        <tr>
+          <td><strong>P3 – Mittel</strong></td>
+          <td>Teilweise Funktionsstörung; Workaround vorhanden oder kurzfristig verfügbar.</td>
+          <td>Einzelnes Endgerät oder einzelner Access Point gestört; nicht-kritische Drucker offline.</td>
+        </tr>
+        <tr>
+          <td><strong>P4 – Niedrig</strong></td>
+          <td>Geringfügige Störung oder allgemeine Service-Anfrage; kein operativer Engpass.</td>
+          <td>Konfigurationsanfrage, Dokumentationsanforderung, kosmetische Mängel.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>5. Reaktionszeiten</h2>
+    <p>
+      Die folgenden Reaktionszeiten gelten ab dem Zeitpunkt der ordnungsgemäßen Störungsmeldung des Kunden bzw. der
+      automatischen Alarmierung durch das Monitoring, jeweils innerhalb der Servicezeit gemäß § 3. Außerhalb der
+      Servicezeit eingehende Meldungen werden zu Beginn der nächsten Servicezeit als eingegangen behandelt.
+    </p>
+    <table class="sla-table" aria-describedby="caption-reaktion">
+      <caption id="caption-reaktion">Reaktionszeiten je Paket (innerhalb der Servicezeit)</caption>
+      <thead>
+        <tr><th>Priorität</th><th>Bronze</th><th>Silber</th><th>Gold</th><th>Platin</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>P1 – Kritisch</td><td>60 Min.</td><td>30 Min.</td><td>15 Min.</td><td>15 Min.</td></tr>
+        <tr><td>P2 – Hoch</td><td>4 Std.</td><td>2 Std.</td><td>1 Std.</td><td>30 Min.</td></tr>
+        <tr><td>P3 – Mittel</td><td>1 Werktag</td><td>8 Std.</td><td>4 Std.</td><td>2 Std.</td></tr>
+        <tr><td>P4 – Niedrig</td><td>2 Werktage</td><td>1 Werktag</td><td>1 Werktag</td><td>1 Werktag</td></tr>
+      </tbody>
+    </table>
+
+    <h2>6. Wiederherstellungszielzeiten</h2>
+    <p>
+      Doktor Netzwerk strebt die folgenden Wiederherstellungszielzeiten ab Beginn der Fehleranalyse an. Diese sind
+      <em>Zielwerte</em> und keine vertraglich garantierten Leistungszeiten, da die tatsächliche Dauer von Faktoren
+      außerhalb der Kontrolle des Anbieters abhängen kann (z. B. Hardware-Lieferzeiten, Mitwirkung Dritter,
+      Komplexität der Störung):
+    </p>
+    <table class="sla-table" aria-describedby="caption-wh">
+      <caption id="caption-wh">Wiederherstellungszielzeiten (Zielwerte)</caption>
+      <thead>
+        <tr><th>Priorität</th><th>Zielwert</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>P1 – Kritisch</td><td>innerhalb 4 Stunden ab Beginn der Fehleranalyse</td></tr>
+        <tr><td>P2 – Hoch</td><td>innerhalb 8 Stunden ab Beginn der Fehleranalyse</td></tr>
+        <tr><td>P3 – Mittel</td><td>innerhalb 2 Werktagen</td></tr>
+        <tr><td>P4 – Niedrig</td><td>nach Absprache, üblicherweise innerhalb 5 Werktagen</td></tr>
+      </tbody>
+    </table>
+
+    <h2>7. Vereinbarte Verfügbarkeit</h2>
+    <p>
+      7.1 Die vereinbarte Verfügbarkeit bezieht sich ausschließlich auf das vom Anbieter installierte und betreute
+      <strong>lokale Praxisnetzwerk</strong>, gemessen am zentralen Praxis-Switch pro Kalendermonat. Die folgenden
+      Verfügbarkeiten gelten je Paket:
+    </p>
+    <table class="sla-table" aria-describedby="caption-verf">
+      <caption id="caption-verf">Vereinbarte monatliche Verfügbarkeit</caption>
+      <thead>
+        <tr><th>Paket</th><th>Verfügbarkeit</th><th>Max. zulässige Ausfallzeit pro Monat (ca.)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Bronze</td><td>99,0 %</td><td>≈ 7 h 18 min</td></tr>
+        <tr><td>Silber</td><td>99,5 %</td><td>≈ 3 h 39 min</td></tr>
+        <tr><td>Gold</td><td>99,7 %</td><td>≈ 2 h 11 min</td></tr>
+        <tr><td>Platin</td><td>99,9 %</td><td>≈ 43 min</td></tr>
+      </tbody>
+    </table>
+    <p>
+      7.2 Die Verfügbarkeit wird wie folgt berechnet:
+    </p>
+    <p style="font-family:ui-monospace,Menlo,Consolas,monospace; background:#f4f7fb; padding:10px 14px; border-radius:8px; display:inline-block">
+      Verfügbarkeit (%) = ((Soll-Betriebszeit − ungeplante Ausfallzeit) / Soll-Betriebszeit) × 100
+    </p>
+    <p>
+      7.3 In die Berechnung der Ausfallzeit gehen ausschließlich vom Anbieter zu vertretende, ungeplante Ausfälle
+      ein. Nicht eingerechnet werden insbesondere:
+    </p>
+    <ul>
+      <li>geplante Wartungsfenster gemäß § 8,</li>
+      <li>höhere Gewalt im Sinne der AGB (Naturereignisse, Pandemien, behördliche Anordnungen, großflächige Strom-
+        oder Telekommunikationsausfälle, Cyberangriffe auf Vorsysteme Dritter etc.),</li>
+      <li>vom Kunden zu vertretende Störungen, insbesondere Eingriffe Dritter, Manipulation am Netzwerk,
+        Stromausfälle in den Praxisräumlichkeiten,</li>
+      <li>Ausfälle der vom Kunden bereitgestellten Komponenten (z. B. Internetzugang des ISP, Endgeräte,
+        Praxisverwaltungssystem, Telematik-Konnektoren),</li>
+      <li>Verzögerungen aufgrund unterlassener oder verspäteter Mitwirkung des Kunden (siehe § 12).</li>
+    </ul>
+
+    <h2>8. Wartungsfenster</h2>
+    <p>
+      8.1 Doktor Netzwerk ist berechtigt, regelmäßig Wartungs- und Aktualisierungsarbeiten durchzuführen.
+      Geplante Wartungen finden grundsätzlich in folgendem Standardwartungsfenster statt:
+    </p>
+    <ul>
+      <li><strong>Sonntags, 02:00 – 06:00 Uhr (MEZ/MESZ)</strong></li>
+    </ul>
+    <p>
+      8.2 Geplante Wartungen, die voraussichtlich zu einer Beeinträchtigung des Praxisbetriebs führen können, werden
+      dem Kunden mindestens <strong>fünf (5) Werktage</strong> im Voraus per E-Mail angekündigt. Wartungen außerhalb
+      der Praxisöffnungszeiten gelten als nicht beeinträchtigend.
+    </p>
+    <p>
+      8.3 In dringenden Fällen (Sicherheits-Patches, akute Bedrohungslage, Bug-Fixes) ist Doktor Netzwerk berechtigt,
+      Notfallwartungen jederzeit und ohne vorherige Ankündigung durchzuführen. Der Kunde wird in diesem Fall
+      unverzüglich nachträglich informiert.
+    </p>
+
+    <h2>9. Eskalationsverfahren</h2>
+    <p>
+      9.1 Für die Meldung und Bearbeitung von Störungen stehen folgende Kanäle zur Verfügung:
+    </p>
+    <ul>
+      <li>Telefonisch unter der vertraglich vereinbarten Service-Hotline,</li>
+      <li>per E-Mail an die vertraglich vereinbarte Support-Adresse,</li>
+      <li>über das Kundenportal (sofern verfügbar).</li>
+    </ul>
+    <p>
+      9.2 Die Eskalation erfolgt nach dem folgenden Stufenmodell:
+    </p>
+    <table class="sla-table" aria-describedby="caption-esk">
+      <caption id="caption-esk">Eskalationsstufen</caption>
+      <thead>
+        <tr><th>Stufe</th><th>Auslöser</th><th>Adressat bei Doktor Netzwerk</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Stufe 1</td><td>Standard-Bearbeitung</td><td>Service Desk</td></tr>
+        <tr><td>Stufe 2</td><td>Reaktionszeit gemäß § 5 überschritten</td><td>Teamleitung Service Desk</td></tr>
+        <tr><td>Stufe 3</td><td>Wiederherstellungszielzeit gemäß § 6 überschritten oder P1 länger als 4 Stunden offen</td><td>Geschäftsführung / Service-Manager</td></tr>
+      </tbody>
+    </table>
+    <p>
+      9.3 Im Paket <em>Platin</em> ist der dedizierte Service-Manager der primäre Ansprechpartner des Kunden und
+      übernimmt die paketinterne Eskalation.
+    </p>
+
+    <h2>10. Service Credits</h2>
+    <p>
+      10.1 Unterschreitet die tatsächliche monatliche Verfügbarkeit die in § 7.1 vereinbarte Verfügbarkeit aus
+      Gründen, die Doktor Netzwerk zu vertreten hat, gewährt Doktor Netzwerk dem Kunden auf Antrag eine Gutschrift
+      auf das Monatsentgelt des betroffenen Support-Pakets („<strong>Service Credit</strong>“) nach folgender
+      Staffel:
+    </p>
+    <table class="sla-table" aria-describedby="caption-sc">
+      <caption id="caption-sc">Service Credits bei Unterschreitung der vereinbarten Verfügbarkeit</caption>
+      <thead>
+        <tr><th>Unterschreitung (in Prozentpunkten)</th><th>Gutschrift (Prozent des Monatsentgelts des Pakets)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>bis 0,5 PP</td><td>10 %</td></tr>
+        <tr><td>über 0,5 PP bis 1,0 PP</td><td>20 %</td></tr>
+        <tr><td>über 1,0 PP bis 2,0 PP</td><td>30 %</td></tr>
+        <tr><td>über 2,0 PP</td><td>50 % (Maximum pro Monat)</td></tr>
+      </tbody>
+    </table>
+    <p>
+      10.2 Service Credits müssen vom Kunden innerhalb von <strong>30 Tagen</strong> nach Ende des betroffenen
+      Kalendermonats in Textform geltend gemacht werden. Sie werden mit dem nächstfälligen Monatsentgelt verrechnet
+      und sind nicht in bar auszahlbar.
+    </p>
+    <p>
+      10.3 Service Credits stellen die abschließende und ausschließliche Kompensation für Unterschreitungen der
+      vereinbarten Verfügbarkeit dar. Weitergehende Ansprüche, insbesondere auf Schadensersatz, richten sich nach
+      § 11 der AGB und bleiben hiervon im Übrigen unberührt.
+    </p>
+    <p>
+      10.4 Die Summe aller in einem rollierenden Zeitraum von zwölf (12) Monaten gewährten Service Credits ist auf
+      <strong>100 % eines Monatsentgelts</strong> begrenzt.
+    </p>
+    <p>
+      10.5 Während eines bestehenden Zahlungsverzugs des Kunden besteht kein Anspruch auf Service Credits.
+    </p>
+
+    <h2>11. Reporting</h2>
+    <table class="sla-table" aria-describedby="caption-rep">
+      <caption id="caption-rep">Berichtswesen je Paket</caption>
+      <thead>
+        <tr><th>Paket</th><th>Berichtsumfang</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Bronze</td><td>Statusbericht auf Anfrage (max. 1× pro Quartal)</td></tr>
+        <tr><td>Silber</td><td>Monatlicher Statusbericht per E-Mail (Verfügbarkeit, Anzahl Tickets, Patch-Status)</td></tr>
+        <tr><td>Gold</td><td>Monatlicher Statusbericht + Quartals-Review (remote)</td></tr>
+        <tr><td>Platin</td><td>Monatlicher Statusbericht + Quartals-Review vor Ort + jährlicher Strategie-Workshop</td></tr>
+      </tbody>
+    </table>
+
+    <h2>12. Mitwirkungspflichten des Kunden</h2>
+    <p>
+      12.1 Die Einhaltung der Service Levels setzt voraus, dass der Kunde seinen Mitwirkungspflichten gemäß § 9
+      der AGB nachkommt. Hierzu zählen insbesondere:
+    </p>
+    <ul>
+      <li>unverzügliche Meldung erkannter Störungen über die vereinbarten Service-Kanäle,</li>
+      <li>Bereitstellung eines kompetenten Ansprechpartners während der Störungsbearbeitung,</li>
+      <li>Gewährung des für die Störungsbehebung erforderlichen Zugangs (physisch und remote, ggf. außerhalb der
+        Praxisöffnungszeiten),</li>
+      <li>Aufrechterhaltung eines funktionsfähigen Internetzugangs und einer funktionsfähigen Stromversorgung,</li>
+      <li>Unterlassung eigener Eingriffe am vom Anbieter betreuten Netzwerk.</li>
+    </ul>
+    <p>
+      12.2 Verzögerungen, die auf eine verspätete oder unterlassene Mitwirkung des Kunden zurückzuführen sind,
+      verlängern Reaktions- und Wiederherstellungszielzeiten entsprechend und gehen nicht in die Berechnung der
+      Verfügbarkeit ein.
+    </p>
+
+    <h2>13. Datensicherung und Wiederherstellung</h2>
+    <p>
+      13.1 In den Paketen <em>Silber</em>, <em>Gold</em> und <em>Platin</em> überwacht Doktor Netzwerk die lokale
+      Datensicherung in Echtzeit; in den Paketen <em>Gold</em> und <em>Platin</em> wird zusätzlich eine redundante
+      Backup-Steuerung im Rechenzentrum des Anbieters bereitgestellt.
+    </p>
+    <p>
+      13.2 Für die im Rechenzentrum gesteuerten Backups gelten folgende Zielwerte:
+    </p>
+    <ul>
+      <li><strong>RPO (Recovery Point Objective):</strong> 24 Stunden (tägliche Sicherung).</li>
+      <li><strong>RTO (Recovery Time Objective):</strong> 8 Stunden für die Wiederherstellung der letzten
+        gesicherten Datenbasis nach Freigabe durch den Kunden.</li>
+      <li><strong>Aufbewahrungsfrist:</strong> 30 Tage rollierend, sofern nicht abweichend vereinbart.</li>
+    </ul>
+    <p>
+      13.3 Test-Wiederherstellungen werden mindestens einmal jährlich gemeinsam mit dem Kunden durchgeführt und
+      protokolliert.
+    </p>
+
+    <h2>14. Subunternehmer</h2>
+    <p>
+      Doktor Netzwerk ist berechtigt, qualifizierte Subunternehmer zur Leistungserbringung einzusetzen. Soweit
+      hierbei personenbezogene Daten des Kunden, insbesondere Patientendaten, verarbeitet werden, gelten ergänzend
+      die Regelungen des separaten Auftragsverarbeitungsvertrages (AVV) gemäß Art. 28 DSGVO.
+    </p>
+
+    <h2>15. Änderungen des SLA</h2>
+    <p>
+      15.1 Doktor Netzwerk ist berechtigt, dieses SLA bei wesentlichen Änderungen der zugrunde liegenden technischen,
+      betrieblichen oder rechtlichen Rahmenbedingungen anzupassen. Änderungen, die den Kunden nicht nur
+      unwesentlich beeinträchtigen, werden mit einer Vorankündigungsfrist von mindestens sechs (6) Wochen in
+      Textform mitgeteilt.
+    </p>
+    <p>
+      15.2 Widerspricht der Kunde der Änderung nicht innerhalb von vier (4) Wochen nach Zugang der Mitteilung in
+      Textform, gilt die Änderung als angenommen. Im Falle eines wirksamen Widerspruchs steht beiden Parteien ein
+      Sonderkündigungsrecht zum Zeitpunkt des Wirksamwerdens der Änderung zu.
+    </p>
+
+    <h2>16. Schlussbestimmungen</h2>
+    <p>
+      16.1 Ergänzend gelten die Allgemeinen Geschäftsbedingungen (AGB) der Knabe GmbH in der jeweils gültigen
+      Fassung.
+    </p>
+    <p>
+      16.2 Es gilt schweizerisches Recht; ausschließlicher Gerichtsstand ist Lampenberg (Kanton Basel-Landschaft,
+      Schweiz). Im Übrigen gilt § 15 der AGB entsprechend.
+    </p>
+    <p>
+      16.3 Sollten einzelne Bestimmungen dieses SLA unwirksam oder undurchführbar sein oder werden, bleibt die
+      Wirksamkeit der übrigen Bestimmungen unberührt.
+    </p>
+
+    <p class="back-home"><a href="index.html">← Zurück zur Startseite</a></p>
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot-bottom">
+    <div>© <span id="yr"></span> Doktor Netzwerk. Alle Rechte vorbehalten.</div>
+    <div class="foot-links">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="agb.html">AGB</a>
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
